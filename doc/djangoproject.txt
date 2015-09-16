@@ -1,0 +1,157 @@
+*djangoproject.txt*                  Basic Django projects support for Vim.
+
+==============================================================================
+INTRODUCTION                                *djangoproject*
+
+*vim-djangoproject* provides a simple way to activate and deactivate
+Django projects from a Vim session. It requires |if_pyth|.
+
+==============================================================================
+COMMANDS                                    *djangoproject-commands*
+
+:DjangoProjectList [path]                   *:DjangoProjectList*
+    List projects located inside the "path" directory.
+    If "path" is not specified, then the value of |g:djangoproject#directory|
+    variable is used.
+
+:DjangoProjectActivate [name]               *:DjangoProjectActivate*
+    Activate the "name" project located inside |g:djangoproject#directory|.
+    Alternatively "name" can be an absolute or a relative path to the
+    project directory, in the latter case it is first expanded against
+    |g:djangoproject#directory| and then against the current directory.
+
+    If "name" is not specified and $DJANGO_SETTINGS_MODULE environment
+    variable is not set, then vim-djangoproject searches from the directory of
+    the current file upwards until it finds a project.
+    If "name" is not specified and $DJANGO_SETTINGS_MODULE environment
+    variable is set, then vim-djangoproject searches from the directory of
+    the current file upwards until it finds a project and then uses the value
+    of $DJANGO_SETTINGS_MODULE as the settings module name.
+
+:DjangoProjectCD                            *:DjangoProjectCD*
+    Change the current directory to the currently active project directory.
+
+:DjangoProjectDeactivate                    *:DjangoProjectDeactivate*
+    Deactivate the currently active project.
+
+==============================================================================
+CONFIGURATION                               *djangoproject-configuration*
+
+g:djangoproject#directory                   *g:djangoproject#directory*
+    This variable appoints the directory that holds projects.
+
+    Default value is '$HOME'.
+
+    Example: >
+        let g:djangoproject#directory = '/path/to/projects'
+<
+d:djangoproject#discover_pattern            *g:djangoproject#discover_pattern*
+    This variable sets the wildcard for the project discovery inside
+    |g:djangoproject#directory|. It is joined with the project name before
+    globbing. This variable can be any wildcard acceptable by |globpath()|.
+
+    Default value is '*'.
+
+g:djangoproject#auto_activate               *g:djangoproject#auto_activate*
+    This variable controls whether vim-djangoproject should attempt to
+    determine and activate a project based on the current file path on file
+    open in the case where the directory of the current file is inside
+    |g:djangoproject#directory|.
+
+    Default value is 1.
+
+                                    *g:djangoproject#auto_activate_everywhere*
+g:djangoproject#auto_activate_everywhere
+    This variable controls whether vim-djangoproject should always attempt to
+    determine and activate a project based on the current file path on file
+    open.
+
+    Note: This variable overrides |g:djangoproject#auto_activate|.
+
+    Default value is 0.
+
+g:djangoproject#update_pythonpath           *g:djangoproject#update_pythonpath*
+    This variable controls whether vim-djangoproject should update $PYTHONPATH
+    environment variable on project activation. The original $PYTHONPATH value
+    is restored on deactivation.
+
+    Default value is 1.
+
+g:djangoproject#import_settings             *g:djangoproject#import_settings*
+    This variable controls whether vim-djangoproject should import and
+    initialize the project settings module on activation.
+
+    Default value is 1.
+
+                                    *g:djangoproject#cdproject_on_activate*
+g:djangoproject#cdproject_on_activate
+    This variable controls whether vim-djangoproject should change the current
+    directory to the project directory on activation.
+
+    Default value is 1.
+
+                                        *g:djangoproject#return_on_deactivate*
+g:djangoproject#return_on_deactivate
+    This variable controls whether vim-djangoproject should restore the
+    current directory to its original value on project deactivation.
+
+    Default value is 1.
+
+g:djangoproject#virtualenv_support          *g:djangoproject#virtualenv_support*
+    This variable controls whether vim-djangoproject should activate and
+    deactivate the corresponding virtualenv on project activation and
+    deactivation, respectively.
+
+    Note: This feature requires |vim-virtualenv| plugin from
+    'https://github.com/Coacher/vim-virtualenv' to be installed.
+
+    Default value is 0.
+
+g:djangoproject#statusline_format           *g:djangoproject#statusline_format*
+    This variable sets the format string for the djangoproject#statusline()
+    function output. Any '%n' flag will be replaced with the name of the
+    currently active project.
+
+    Default value is '%n'.
+
+    Example: >
+        let g:djangoproject#statusline_format = '[%n]'
+<
+                                        *g:djangoproject#force_python_version*
+g:djangoproject#force_python_version
+    This variable forces vim-djangoproject to use the specified version of the
+    |python| command and skip the Python version check for the project.
+    Accepted values are '2' and '3' for |:python| and |:python3| commands,
+    respectively.
+
+    Undefined by default.
+
+g:djangoproject#debug                              *g:djangoproject#debug*
+    This variable controls whether vim-djangoproject should print warning
+    messages.
+
+    Default value is 0.
+
+==============================================================================
+STATUSLINE                                  *djangoproject-statusline*
+
+Name of the currently active project can be shown in the |'statusline'|, or in
+any other place, by calling the djangoproject#statusline() function. The
+output is controlled by the |g:djangoproject#statusline_format| variable.
+
+==============================================================================
+ABOUT                                       *djangoproject-about*
+
+Author:                         Ilya Tumaykin <itumaykin(at)gmail(dot)com>
+
+Find the latest version of vim-djangoproject at:
+
+https://github.com/Coacher/vim-djangoproject
+
+==============================================================================
+LICENSE                                     *djangoproject-license*
+
+vim-djangoproject is released under the Vim License.
+See |license|.
+
+vim:tw=78:sw=4:ft=help:norl:
