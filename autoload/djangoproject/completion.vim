@@ -1,20 +1,9 @@
 function! djangoproject#completion#init()
     let s:cache = {}
     let l:projects = djangoproject#find(g:djangoproject#directory)
-    let l:duplicates = {}
-    for l:directory in l:projects
-        let l:name = fnamemodify(l:directory, ':t')
-        if !has_key(s:cache, l:name)
-            let s:cache[l:name] = l:directory
-        else
-            let s:cache[l:directory] = l:directory
-            let l:duplicates[l:name] = ''
-        endif
-    endfor
-    for l:key in keys(l:duplicates)
-        let l:directory = s:cache[l:key]
-        let s:cache[l:directory] = l:directory
-        unlet s:cache[l:key]
+    for l:project in l:projects
+        let l:relpath = substitute(l:project, '^'.g:djangoproject#directory.'/', '', '')
+        let s:cache[l:relpath] = l:project
     endfor
 endfunction
 
