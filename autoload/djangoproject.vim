@@ -39,7 +39,7 @@ function! djangoproject#activate(...)
                     call s:Warning('multiple projects under the name '.
                                    \l:name.' were found in '.l:directory)
                     call s:Warning('processing '.l:target)
-                elseif (l:directory ==# g:djangoproject#directory) && (l:name !~# '/')
+                elseif (l:directory ==# g:djangoproject#directory) && (l:name !~# '^[\./]')
                     call djangoproject#completion#refresh()
                 endif
                 return djangoproject#deactivate() || djangoproject#force_activate(l:target)
