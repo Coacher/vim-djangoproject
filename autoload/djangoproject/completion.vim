@@ -42,11 +42,8 @@ function! djangoproject#completion#do(arglead, ...)
         " first search in the completion cache
         " clean project pattern
         let l:project = escape(l:arglead, '~')
-        " match either project name, or tail of project path
-        let l:projects =
-            \ djangoproject#completion#match('^'.l:project.'[^/]*$') +
-            \ s:relpathlist(djangoproject#completion#match('/'.l:project.'[^/]*$'),
-            \               g:djangoproject#directory)
+        " match either project name, or tail of relative project path
+        let l:projects = djangoproject#completion#match('\(^\|/\)'.l:project.'[^/]*$')
         " then search inside the current directory
         if (g:djangoproject#directory !=# l:directory)
             call s:appendcwdlist(l:projects, s:relprojectlist(l:directory, l:pattern))
