@@ -76,7 +76,7 @@ function! djangoproject#completion#do(arglead, ...)
             let l:pattern = l:arglead.'*'
             let l:directory = getcwd()
             " first search inside g:djangoproject#directory
-            let l:projects = s:relprojectlist(g:djangoproject#directory, l:pattern)
+            let l:projects = djangoproject#completion#match('^'.l:arglead)
             " then search inside the current directory
             if (g:djangoproject#directory !=# l:directory)
                 call s:appendcwdlist(l:projects, s:relprojectlist(l:directory, l:pattern))
