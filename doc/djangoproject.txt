@@ -102,8 +102,8 @@ g:djangoproject#virtualenv_support          *g:djangoproject#virtualenv_support*
     deactivate the corresponding virtualenv on project activation and
     deactivation, respectively.
 
-    Note: This feature requires |vim-virtualenv| plugin from
-    'https://github.com/Coacher/vim-virtualenv' to be installed.
+    Note: This feature requires |vim-virtualenv| plugin newer than 'v2.0.0'
+    release to be installed from 'https://github.com/Coacher/vim-virtualenv'.
 
     Default value is 0.
 
