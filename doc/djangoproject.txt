@@ -83,7 +83,7 @@ g:djangoproject#import_settings             *g:djangoproject#import_settings*
 
     Default value is 0.
 
-                                    *g:djangoproject#cdproject_on_activate*
+                                        *g:djangoproject#cdproject_on_activate*
 g:djangoproject#cdproject_on_activate
     This variable controls whether vim-djangoproject should change the current
     directory to the project directory on activation.
@@ -126,7 +126,7 @@ g:djangoproject#force_python_version
 
     Undefined by default.
 
-g:djangoproject#debug                              *g:djangoproject#debug*
+g:djangoproject#debug                       *g:djangoproject#debug*
     This variable controls whether vim-djangoproject should print warning
     messages.
 
