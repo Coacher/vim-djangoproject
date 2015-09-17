@@ -29,7 +29,7 @@ function! djangoproject#completion#get(project)
     if !exists('s:cache')
         call djangoproject#completion#init()
     endif
-    return has_key(s:cache, a:project) ? s:cache[a:project] : ''
+    return get(s:cache, a:project, '')
 endfunction
 
 function! djangoproject#completion#do(arglead, ...)
