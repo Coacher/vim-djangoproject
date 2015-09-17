@@ -1,7 +1,17 @@
 *djangoproject.txt*                  Basic Django projects support for Vim.
 
 ==============================================================================
-INTRODUCTION                                *djangoproject*
+CONTENTS                                    *djangoproject-contents*
+
+    1. Introduction.........................|djangoproject-introduction|
+    2. Commands.............................|djangoproject-commands|
+    3. Configuration........................|djangoproject-configuration|
+    4. The 'statusline' flag................|djangoproject-statusline|
+    5. About................................|djangoproject-about|
+    6. License..............................|djangoproject-license|
+
+==============================================================================
+INTRODUCTION                                *djangoproject-introduction*
 
 *vim-djangoproject* provides a simple way to activate and deactivate
 Django projects from a Vim session. It requires |if_pyth|.
