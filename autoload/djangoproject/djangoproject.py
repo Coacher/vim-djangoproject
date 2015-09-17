@@ -6,7 +6,7 @@ class DjangoProjectPlugin(object):
             setattr(self, attr, None)
 
     def activate(self, directory, settings, update_pythonpath=True,
-                 import_settings=True):
+                 import_settings=False):
         import os
         import sys
 

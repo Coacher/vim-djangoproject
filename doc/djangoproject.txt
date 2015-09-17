@@ -81,7 +81,7 @@ g:djangoproject#import_settings             *g:djangoproject#import_settings*
     This variable controls whether vim-djangoproject should import and
     initialize the project settings module on activation.
 
-    Default value is 1.
+    Default value is 0.
 
                                     *g:djangoproject#cdproject_on_activate*
 g:djangoproject#cdproject_on_activate

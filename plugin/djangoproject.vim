@@ -31,7 +31,7 @@ let g:djangoproject#auto_activate_everywhere =
 let g:djangoproject#update_pythonpath =
     \ get(g:, 'djangoproject#update_pythonpath', 1)
 let g:djangoproject#import_settings =
-    \ get(g:, 'djangoproject#import_settings', 1)
+    \ get(g:, 'djangoproject#import_settings', 0)
 let g:djangoproject#cdproject_on_activate =
     \ get(g:, 'djangoproject#cdproject_on_activate', 1)
 let g:djangoproject#return_on_deactivate =
