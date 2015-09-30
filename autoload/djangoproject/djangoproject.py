@@ -15,9 +15,9 @@ class DjangoProjectPlugin(object):
         self.prev_sys_path = list(sys.path)
         self.prev_py_path = os.environ.get('PYTHONPATH', None)
 
-        pardir = os.path.normpath(os.path.join(directory, os.pardir))
+        container = os.path.normpath(os.path.join(directory, os.pardir))
 
-        for path in (pardir, directory):
+        for path in (container, directory):
             if path not in self.prev_sys_path:
                 sys.path.append(path)
 
