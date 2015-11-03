@@ -8,6 +8,9 @@ By default, `:python` and `:python3` commands have access only to the
 system-wide Python environment. vim-djangoproject changes the Vim internal
 Python `sys.path` and environment `$DJANGO_SETTINGS_MODULE` and `$PYTHONPATH`
 variables so that they refer to the chosen Django project, i.e. activates it.
+Optionally, the project's settings module is imported and initialized.
+
+Tested and works with Django 1.4 and 1.8 release series.
 
 Usage examples
 ==============
