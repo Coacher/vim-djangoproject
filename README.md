@@ -12,6 +12,11 @@ Optionally, the project's settings module is imported and initialized.
 
 Tested and works with Django 1.4 and 1.8 release series.
 
+**Note.**
+Since the v1.0.0 release there are no new features planned and there are no
+known issues. Nevertheless this plugin is still maintained so feel free to file
+a bug report or a feature request.
+
 Usage examples
 ==============
 
