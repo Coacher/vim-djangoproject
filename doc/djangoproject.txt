@@ -7,14 +7,16 @@ CONTENTS                                    *djangoproject-contents*
     2. Commands.............................|djangoproject-commands|
     3. Configuration........................|djangoproject-configuration|
     4. The 'statusline' flag................|djangoproject-statusline|
-    5. About................................|djangoproject-about|
-    6. License..............................|djangoproject-license|
+    5. Functions............................|djangoproject-functions|
+    6. About................................|djangoproject-about|
+    7. License..............................|djangoproject-license|
 
 ==============================================================================
 INTRODUCTION                                *djangoproject-introduction*
 
-*vim-djangoproject* provides a simple way to activate and deactivate
-Django projects from a Vim session. It requires |if_pyth|.
+*vim-djangoproject* plugin provides a simple way to activate and deactivate
+Django(https://www.djangoproject.com/) projects from a Vim session.
+It requires |if_pyth|.
 
 ==============================================================================
 COMMANDS                                    *djangoproject-commands*
@@ -26,17 +28,17 @@ COMMANDS                                    *djangoproject-commands*
 
 :DjangoProjectActivate [name]               *:DjangoProjectActivate*
     Activate the "name" project located inside |g:djangoproject#directory|.
-    Alternatively "name" can be an absolute or a relative path to the
-    project directory, in the latter case it is first expanded against
+    Alternatively "name" can be an absolute or a relative path to the project
+    directory, in the latter case it is first expanded against
     |g:djangoproject#directory| and then against the current directory.
 
     If "name" is not specified and $DJANGO_SETTINGS_MODULE environment
     variable is not set, then vim-djangoproject searches from the directory of
     the current file upwards until it finds a project.
     If "name" is not specified and $DJANGO_SETTINGS_MODULE environment
-    variable is set, then vim-djangoproject searches from the directory of
-    the current file upwards until it finds a project and then uses the value
-    of $DJANGO_SETTINGS_MODULE as the settings module name.
+    variable is set, then vim-djangoproject searches from the directory of the
+    current file upwards until it finds a project and then uses the value of
+    $DJANGO_SETTINGS_MODULE as the settings module name.
 
 :DjangoProjectCD                            *:DjangoProjectCD*
     Change the current directory to the currently active project directory.
@@ -56,9 +58,9 @@ g:djangoproject#directory                   *g:djangoproject#directory*
         let g:djangoproject#directory = '/path/to/projects'
 <
 d:djangoproject#discover_pattern            *g:djangoproject#discover_pattern*
-    This variable sets the wildcard for the project discovery inside
-    |g:djangoproject#directory|. It is joined with the project name before
-    globbing. This variable can be any wildcard acceptable by |globpath()|.
+    This variable sets the wildcard for the project discovery.
+    It is joined with the project name before globbing. This variable can be
+    any wildcard acceptable by |globpath()|.
 
     Default value is '*'.
 
@@ -89,7 +91,7 @@ g:djangoproject#update_pythonpath           *g:djangoproject#update_pythonpath*
 
 g:djangoproject#import_settings             *g:djangoproject#import_settings*
     This variable controls whether vim-djangoproject should import and
-    initialize the project settings module on activation.
+    initialize the project's settings module on activation.
 
     Default value is 0.
 
@@ -109,7 +111,7 @@ g:djangoproject#return_on_deactivate
 
 g:djangoproject#virtualenv_support          *g:djangoproject#virtualenv_support*
     This variable controls whether vim-djangoproject should activate and
-    deactivate the corresponding virtualenv on project activation and
+    deactivate the appropriate virtualenv on project activation and
     deactivation, respectively.
 
     Note: This feature requires |vim-virtualenv| plugin newer than 'v2.0.0'
@@ -118,7 +120,7 @@ g:djangoproject#virtualenv_support          *g:djangoproject#virtualenv_support*
     Default value is 0.
 
 g:djangoproject#statusline_format           *g:djangoproject#statusline_format*
-    This variable sets the format string for the djangoproject#statusline()
+    This variable sets the format string for the |djangoproject#statusline()|
     function output. Any '%n' flag will be replaced with the name of the
     currently active project.
 
@@ -146,8 +148,61 @@ g:djangoproject#debug                       *g:djangoproject#debug*
 STATUSLINE                                  *djangoproject-statusline*
 
 Name of the currently active project can be shown in the |'statusline'|, or in
-any other place, by calling the djangoproject#statusline() function. The
+any other place, by calling the |djangoproject#statusline()| function. The
 output is controlled by the |g:djangoproject#statusline_format| variable.
+
+==============================================================================
+FUNCTIONS                                   *djangoproject-functions*
+
+djangoproject#init()                        *djangoproject#init()*
+    Initialize vim-djangoproject plugin: normalize |g:djangoproject#directory|
+    value.
+
+djangoproject#activate([{target}])          *djangoproject#activate()*
+    Autoload function that provides |:DjangoProjectActivate| command
+    functionality. This is a wrapper around |djangoproject#force_activate()|.
+
+                                            *djangoproject#force_activate()*
+djangoproject#force_activate({target} [, {settings}])
+    Activate the project located inside the {target} directory.
+    If the optional {settings} argument is given, then it sets the value of
+    $DJANGO_SETTINGS_MODULE environment variable.
+
+djangoproject#deactivate()                  *djangoproject#deactivate()*
+    Autoload function that provides |:DjangoProjectDeactivate| command
+    functionality. This is a wrapper around
+    |djangoproject#force_deactivate()|.
+
+djangoproject#force_deactivate()            *djangoproject#force_deactivate()*
+    Deactivate the currently active project.
+    If the project's settings module was imported during activation it doesn't
+    get "unimported".
+
+djangoproject#cdproject()                   *djangoproject#cdproject()*
+    Autoload function that provides |:DjangoProjectCD| command functionality.
+
+djangoproject#list([{directory}])           *djangoproject#list()*
+    Autoload function that provides |:DjangoProjectList| command functionality.
+    This is a wrapper around |djangoproject#find()|.
+
+                                            *djangoproject#find()*
+djangoproject#find({target} [, {pattern}])
+    Return a list of projects located inside the {target} directory.
+    If the optional {pattern} argument is given, then only projects that match
+    it are returned. {pattern} can be any pattern acceptable by |globpath()|.
+
+djangoproject#statusline()                  *djangoproject#statusline()*
+    Return the currently active project name or "" if there is none.
+    See also |djangoproject-statusline|.
+
+djangoproject#origin({target})              *djangoproject#origin()*
+    Search from the {target} directory upwards until a project is found.
+    Return the found project directory or "" if none was found.
+
+djangoproject#state([{variable}])           *djangoproject#state()*
+    Echo the internal plugin state.
+    If the optional {variable} argument is given, then echo the value of
+    {variable} only.
 
 ==============================================================================
 ABOUT                                       *djangoproject-about*
