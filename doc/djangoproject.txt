@@ -31,14 +31,14 @@ COMMANDS                                    *djangoproject-commands*
     Alternatively "name" can be an absolute or a relative path to the project
     directory, in the latter case it is first expanded against
     |g:djangoproject#directory| and then against the current directory.
+    If "name" is not specified, then vim-djangoproject searches from the
+    directory of the current file upwards until it finds a project.
 
-    If "name" is not specified and $DJANGO_SETTINGS_MODULE environment
-    variable is not set, then vim-djangoproject searches from the directory of
-    the current file upwards until it finds a project.
-    If "name" is not specified and $DJANGO_SETTINGS_MODULE environment
-    variable is set, then vim-djangoproject searches from the directory of the
-    current file upwards until it finds a project and then uses the value of
-    $DJANGO_SETTINGS_MODULE as the settings module name.
+    If $DJANGO_SETTINGS_MODULE environment variable is not set, then
+    vim-djangoproject sets its value based on the project name.
+    If $DJANGO_SETTINGS_MODULE environment variable is set, then
+    vim-djangoproject uses its value as the settings module name.
+    See also |g:djangoproject#import_settings|.
 
 :DjangoProjectCD                            *:DjangoProjectCD*
     Change the current directory to the currently active project directory.
@@ -91,7 +91,8 @@ g:djangoproject#update_pythonpath           *g:djangoproject#update_pythonpath*
 
 g:djangoproject#import_settings             *g:djangoproject#import_settings*
     This variable controls whether vim-djangoproject should import and
-    initialize the project's settings module on activation.
+    initialize the project's settings module (the one specified by
+    $DJANGO_SETTINGS_MODULE environment variable) on activation.
 
     Default value is 0.
 
