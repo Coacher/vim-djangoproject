@@ -58,9 +58,8 @@ g:djangoproject#directory                   *g:djangoproject#directory*
         let g:djangoproject#directory = '/path/to/projects'
 <
 d:djangoproject#discover_pattern            *g:djangoproject#discover_pattern*
-    This variable sets the wildcard for the project discovery.
-    It is joined with the project name before globbing. This variable can be
-    any wildcard acceptable by |globpath()|.
+    This variable sets the pattern that is used for project discovery.
+    This variable can be any pattern acceptable by |globpath()|.
 
     Default value is '*'.
 
